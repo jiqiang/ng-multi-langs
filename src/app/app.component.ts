@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ng-multi-lang';
+  availableLangs: string[];
+
+  constructor(private translocoService: TranslocoService) {
+    this.availableLangs = <string[]>translocoService.getAvailableLangs();
+  }
+
+  onChangeLang(event) {
+    this.translocoService.setActiveLang(event.target.value);
+  }
 }
